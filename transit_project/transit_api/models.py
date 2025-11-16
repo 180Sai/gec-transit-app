@@ -11,7 +11,7 @@ class Route(models.Model):
 	color = models.CharField(max_length=6)
 
 class Stop(models.Model):
-	id = models.IntegerField()
+	id = models.IntegerField(primary_key=True)
 	code = models.IntegerField()
 	name = models.CharField(max_length=100)
 	desc = models.CharField(max_length=100)
@@ -19,7 +19,7 @@ class Stop(models.Model):
 	longitude = models.FloatField(decimal_places=6)
 
 class StopTime(models.Model):
-	trip_id = models.IntegerField()
+	trip_id = models.IntegerField(primary_key=True)
 	arrival_time = models.TimeField()
 	departure_time = models.TimeField()
 	stop_id = models.IntegerField()
@@ -29,7 +29,7 @@ class StopTime(models.Model):
 	is_exact = models.BooleanField(default=True)
 
 class Trip(models.Model):
-	route_id = models.IntegerField()
+	route_id = models.IntegerField(primary_key=True)
 	id = models.IntegerField()
 	trip_headsign = models.CharField(max_length=50)
 	direction_id = models.BooleanField(default=True)
@@ -38,7 +38,7 @@ class Trip(models.Model):
 	is_bikes = models.BooleanField(default=True)
 
 class Shape(models.Model):
-	id = models.IntegerField()
+	id = models.IntegerField(primary_key=True)
 	shape_pt_lat = models.FloatField(decimal_places=5)
 	shape_pt_lon = models.FloatField(decimal_places=5)
 	shape_pt_sequence = models.IntegerField()

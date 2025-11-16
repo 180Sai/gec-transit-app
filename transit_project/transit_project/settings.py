@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'transit_api',
+	'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
