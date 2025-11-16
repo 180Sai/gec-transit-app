@@ -114,7 +114,7 @@ class TransitPlanner:
 		return Stop.objects.annotate(
 			location=Func(F('longitude'), F('latitude'), function='ST_MakePoint', srid=4326)
 		).filter(
-			location__dwithin=(point, D(m=MAX_WALK_METERS))
+			location__dwithin=(point, Distance(m=MAX_WALK_METERS))
 		)
 
 	def _heuristic(self, coords):
