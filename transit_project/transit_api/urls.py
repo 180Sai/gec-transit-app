@@ -10,5 +10,6 @@ router.register(r'stoptimes', StopTimeViewSet)
 router.register(r'trips', TripViewSet)
 
 urlpatterns = [
-	path('', include(router.urls))
+	path('', include(router.urls)),
+	path('plan/', PlanTripView.as_view(), name='plan-trip'),
 ]
