@@ -10,6 +10,9 @@ class Route(models.Model):
 	long_name = models.CharField(max_length=100)
 	color = models.CharField(max_length=6)
 
+	def __str__(self):
+		return self.short_name or self.long_name
+
 class Stop(models.Model):
 	id = models.IntegerField(primary_key=True)
 	code = models.IntegerField()
@@ -18,8 +21,12 @@ class Stop(models.Model):
 	latitude = models.FloatField(decimal_places=6)
 	longitude = models.FloatField(decimal_places=6)
 
+	def __str__(self):
+		return self.name
+
+
 class StopTime(models.Model):
-	trip_id = models.IntegerField(primary_key=True)
+	trip_id = models.IntegerField()
 	arrival_time = models.TimeField()
 	departure_time = models.TimeField()
 	stop_id = models.IntegerField()
@@ -27,6 +34,15 @@ class StopTime(models.Model):
 	drop_off = models.BooleanField(default=True)
 	shape_dist_traveled = models.FloatField(decimal_places=5)
 	timepoint = models.BooleanField(default=True)
+
+	class Meta:
+        # This is the true key of a StopTime record.
+		unique_together = ('trip', 'stop_sequence')
+		ordering = ['stop_sequence']
+	
+	def __str__(self):
+		return f"{self.trip.id} @ Seq {self.stop_sequence}: {self.stop.name}"
+
 
 class Trip(models.Model):
 	route_id = models.IntegerField(primary_key=True)
@@ -37,9 +53,17 @@ class Trip(models.Model):
 	is_accessible = models.BooleanField(default=True)
 	is_bikes = models.BooleanField(default=True)
 
+	def __str__(self):
+		return f"{self.route.short_name} - {self.trip_headsign}"
+
+
 class Shape(models.Model):
 	id = models.IntegerField(primary_key=True)
 	shape_pt_lat = models.FloatField(decimal_places=5)
 	shape_pt_lon = models.FloatField(decimal_places=5)
 	shape_pt_sequence = models.IntegerField()
 	shape_dist_traveled = models.FloatField(decimal_places=4)
+
+	class Meta:
+		unique_together = ('id', 'shape_pt_sequence')
+		ordering = ['shape_pt_sequence']

@@ -11,5 +11,5 @@ router.register(r'trips', TripViewSet)
 
 urlpatterns = [
 	path('', include(router.urls)),
-	path('api/routes/', get_shortest_routes, name='get_shortest_routes'),
+	path('plan/', PlanTripView.as_view(), name='plan-trip'),
 ]
