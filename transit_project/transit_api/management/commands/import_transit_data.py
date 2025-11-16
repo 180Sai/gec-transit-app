@@ -2,7 +2,7 @@ import csv
 from datetime import datetime
 from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_time
-from transit_api.models import Route, Stop, StopTimes, Trip, Shape
+from transit_api.models import Route, Stop, StopTime, Trip, Shape
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -18,7 +18,6 @@ class Command(BaseCommand):
                     color=row['route_color']
                 ))
         Route.objects.bulk_create(routes)
-        self.stdout.write("✅ Routes loaded.")
 
         # Load Stops
         stops = []
@@ -34,14 +33,13 @@ class Command(BaseCommand):
                     longitude=float(row['stop_lon'])
                 ))
         Stop.objects.bulk_create(stops)
-        self.stdout.write("✅ Stops loaded.")
 
         # Load StopTimes
         stoptimes = []
         with open('route-data/stop_times.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                stoptimes.append(StopTimes(
+                stoptimes.append(StopTime(
                     trip_id=int(row['trip_id']),
                     arrival_time=parse_time(row['arrival_time']),
                     departure_time=parse_time(row['departure_time']),
@@ -51,8 +49,7 @@ class Command(BaseCommand):
                     shape_dist_traveled=float(row['shape_dist_traveled']),
                     timepoint=bool(int(row['timepoint']))
                 ))
-        StopTimes.objects.bulk_create(stoptimes)
-        self.stdout.write("✅ StopTimes loaded.")
+        StopTime.objects.bulk_create(stoptimes)
 
         # Load Trips
         trips = []
@@ -69,7 +66,6 @@ class Command(BaseCommand):
                     is_bikes=bool(int(row['bikes_allowed']))
                 ))
         Trip.objects.bulk_create(trips)
-        self.stdout.write("✅ Trips loaded.")
 
         # Load Shapes
         shapes = []
