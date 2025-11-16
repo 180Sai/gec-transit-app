@@ -26,7 +26,7 @@ class StopTimes(models.Model):
 	pick_up = models.BooleanField(default=True)
 	drop_off = models.BooleanField(default=True)
 	shape_dist_traveled = models.FloatField(decimal_places=5)
-	is_exact = models.BooleanField(default=True)
+	timepoint = models.BooleanField(default=True)
 
 class Trip(models.Model):
 	route_id = models.IntegerField()
