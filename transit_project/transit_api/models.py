@@ -18,7 +18,7 @@ class Stop(models.Model):
 	latitude = models.FloatField(decimal_places=6)
 	longitude = models.FloatField(decimal_places=6)
 
-class StopTimes(models.Model):
+class StopTime(models.Model):
 	trip_id = models.IntegerField()
 	arrival_time = models.TimeField()
 	departure_time = models.TimeField()
