@@ -43,3 +43,4 @@ class Shape(models.Model):
 	shape_pt_lon = models.FloatField(decimal_places=5)
 	shape_pt_sequence = models.IntegerField()
 	shape_dist_traveled = models.FloatField(decimal_places=4)
+
