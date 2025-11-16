@@ -22,7 +22,8 @@ class Stop(models.Model):
 
 
 class StopTime(models.Model):
-	trip_id = models.IntegerField()
+	trip_id = models.IntegerField(null=False, blank=False)
+	stop_sequence = models.IntegerField(null=False, blank=False)
 	arrival_time = models.TimeField()
 	departure_time = models.TimeField()
 	stop_id = models.IntegerField()
@@ -33,7 +34,7 @@ class StopTime(models.Model):
 
 	class Meta:
         # This is the true key of a StopTime record.
-		unique_together = ('trip', 'stop_sequence')
+		unique_together = ('trip_id', 'stop_sequence')
 		ordering = ['stop_sequence']
 	
 	def __str__(self):
