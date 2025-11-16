@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Guelph Transit — Route Planner</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div style="font-weight:700; color:#2563eb;">Guelph Transit — Route Planner</div>
+    <div class="small">Find the best routes from A to B</div>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <!-- Route Planning Section -->
+      <div class="section-title">Plan Your Journey</div>
+      
+      <!-- Start Location -->
+      <div style="margin-bottom:16px;">
+        <label for="startSearch">From (Start Location)</label>
+        <div class="suggestions">
+          <input id="startSearch" type="text" placeholder="Enter start location..." autocomplete="off" />
+          <div id="startSuggestBox" class="suggest-box" style="display:none"></div>
+        </div>
+        <div id="selectedStart" class="small" style="margin-top:4px; color:#2563eb;"></div>
+      </div>
+
+      <!-- End Location -->
+      <div style="margin-bottom:16px;">
+        <label for="endSearch">To (Destination)</label>
+        <div class="suggestions">
+          <input id="endSearch" type="text" placeholder="Enter destination..." autocomplete="off" />
+          <div id="endSuggestBox" class="suggest-box" style="display:none"></div>
+        </div>
+        <div id="selectedEnd" class="small" style="margin-top:4px; color:#2563eb;"></div>
+      </div>
+
+      <!-- Extended Features -->
+      <div class="section-title">Route Options</div>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="ecoFriendly" />
+          <label for="ecoFriendly">Eco-friendly routes (electric buses)</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="rideSharing" />
+          <label for="rideSharing">Include ride sharing options</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="onDemand" />
+          <label for="onDemand">Include on-demand services</label>
+        </div>
+      </div>
+
+      <!-- Find Routes Button -->
+      <button id="findRoutes" class="btn" style="width:100%; margin:8px 0 16px 0;">Find Routes</button>
+
+      <div class="divider"></div>
+
+      <!-- Route Results -->
+      <div class="section-title">Route Options</div>
+      <div id="routeResults" class="list">
+        <div class="status info">Enter start and destination to find routes</div>
+      </div>
+
+      <div class="hint">
+        <strong>Tip:</strong> This app connects to the Guelph Transit backend to find the best routes based on real-time data.
+      </div>
+    </div>
+
+    <div class="mapwrap">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- App Scripts -->
+  <script src="js/map.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
